@@ -1,11 +1,7 @@
 const mongoose = require("mongoose");
 
-const patientSchema = new mongoose.Schema(
+const adminSchema = new mongoose.Schema(
   {
-    is_active: {
-      type: Boolean,
-      default: false,
-    },
     first_name: {
       type: String,
       required: true,
@@ -33,28 +29,11 @@ const patientSchema = new mongoose.Schema(
         message: `invalid email format`,
       },
     },
-    date_of_birth: {
-      type: Date,
-      required: true,
-    },
-    gender: {
-      type: String,
-      required: true,
-    },
     avatar_url: {
       type: String,
       default:
         "https://www.suitdoctors.com/wp-content/uploads/2016/11/dummy-man-570x570.png",
     },
-    address: {
-      type: String,
-      required: true,
-    },
-    isPremium: {
-      type: Boolean,
-      default: false,
-      required: true,
-    }
   },
   {
     versionKey: false,
@@ -62,5 +41,5 @@ const patientSchema = new mongoose.Schema(
   }
 );
 
-const Patients = mongoose.model("Patients", patientSchema);
-module.exports = Patients;
+const Admin = mongoose.model("Admin", adminSchema);
+module.exports = Admin;

@@ -7,6 +7,11 @@ const { PATIENT, PSIKIATER } = require("../constants/role");
 Router.get("/patient", AppointmentController.getAppointmentDataByPatientId);
 
 Router.get(
+  "/time-schedule",
+  AppointmentController.getAppointmentPsikiaterSchedule
+);
+
+Router.get(
   "/psikiater",
   authorization(PSIKIATER),
   AppointmentController.getAppointmentDataByPsikiaterId

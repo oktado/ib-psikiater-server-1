@@ -8,5 +8,4 @@ Router.post("/register-psikiater", AuthController.registerPsikiater);
 Router.post("/login", AuthController.login);
 
 Router.get("/identifer", authentication, AuthController.userIdentifier);
-
 module.exports = Router;

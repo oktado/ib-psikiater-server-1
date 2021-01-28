@@ -50,5 +50,23 @@ class PatientController {
       next(error);
     }
   };
+
+  static getAllPatientData = async (req, res, next) => {
+    try {
+      const patientData = await PatientModel.find();
+
+      if (!patientData) {
+        throw new Error("Patient Not Found");
+      }
+
+      res.status(200).json({
+        status: "Success",
+        message: "Success Get All Patient Data",
+        data: patientData,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 module.exports = PatientController;

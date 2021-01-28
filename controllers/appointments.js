@@ -2,6 +2,26 @@
 const AppointmentModel = require("../models/appointments");
 
 class AppointmentController {
+  static getAppointmentPsikiaterSchedule = async (req, res, next) => {
+    const { psikiater_id, appointment_date } = req.query;
+    try {
+      const appointmentData = await AppointmentModel.find({
+        $and: [
+          { psikiater_id: psikiater_id },
+          { appointment_date: appointment_date },
+        ],
+      });
+
+      res.status(200).json({
+        status: "Success",
+        message: "Success Get Psikiater Time Schedule",
+        data: appointmentData.map((item) => item.appointment_time),
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
   static getOneAppointmentDataByAppointmentId = async (req, res, next) => {
     try {
       const { appointment_id } = req.params;
@@ -81,6 +101,7 @@ class AppointmentController {
         allergy,
         diagnose_name,
         diagnose_date,
+        isOnline,
       } = req.body;
 
       const appointmentData = {
@@ -90,6 +111,7 @@ class AppointmentController {
         appointment_time: appointment_time,
         complaint: complaint,
         allergy: allergy,
+        isOnline: isOnline,
         diagnose: {
           diagnose_name: diagnose_name,
           diagnose_date: diagnose_date,

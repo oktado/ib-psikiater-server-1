@@ -1,10 +1,11 @@
 "use strict";
 
 const jwt = require("jsonwebtoken");
-const { PATIENT, PSIKIATER } = require("../constants/role");
+const { PATIENT, PSIKIATER, ADMIN } = require("../constants/role");
 const SECRET_KEY = process.env.SECRET_KEY;
 const PatientsModel = require("../models/patients");
 const PsikiatersModel = require("../models/psikiaters");
+const AdminModel = require("../models/admin");
 
 const authentication = async (req, res, next) => {
   try {
@@ -14,7 +15,7 @@ const authentication = async (req, res, next) => {
     }
     const { user_id, role } = jwt.verify(accesstoken, SECRET_KEY);
 
-    if (role !== PATIENT && role !== PSIKIATER) {
+    if (role !== PATIENT && role !== PSIKIATER && role !== ADMIN) {
       throw new Error("JWT Malformed");
     }
 
@@ -30,6 +31,14 @@ const authentication = async (req, res, next) => {
       const psikiater = await PsikiatersModel.findById(user_id);
 
       if (!psikiater) {
+        throw new Error("JWT Malformed");
+      }
+    }
+
+    if (role === ADMIN) {
+      const admin = await AdminModel.findById(user_id);
+
+      if (!admin) {
         throw new Error("JWT Malformed");
       }
     }
