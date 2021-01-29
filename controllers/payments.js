@@ -107,6 +107,38 @@ class PaymentController {
     }
   };
 
+  static getPendingByIdPatient = async (req, res, next) => {
+    const { patient_id } = req.params;
+    try {
+      const payments = await PaymentModel.find({
+        patient: patient_id,
+        payment_status: "Pending",
+      })
+        .populate({
+          path: "product_detail",
+          populate: {
+            path: "patient_id",
+            model: "Patients",
+          },
+        })
+        .populate({
+          path: "product_detail",
+          populate: {
+            path: "psikiater_id",
+            model: "Psikiaters",
+          },
+        });
+
+      res.status(200).json({
+        status: "Success",
+        message: "Get pending payment by patient id success",
+        data: payments,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
   static uploadPaymentSlip = async (req, res, next) => {
     try {
       const { filename } = req.file;
