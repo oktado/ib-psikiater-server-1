@@ -14,7 +14,7 @@ const emailer = async (receiver, subject, htmlContent) => {
     });
 
     const mail = await transporter.sendMail({
-      from: `"Caper" <${process.env.SMTP_HOST_EMAIL}>`,
+      from: `"FILINGS" <${process.env.SMTP_HOST_EMAIL}>`,
       to: receiver,
       subject: subject,
       html: htmlContent,

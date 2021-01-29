@@ -17,9 +17,9 @@ class VerifyController {
 
       if (verifyData) {
         if (role === "PATIENT") {
-          await PatientModel.updateOne({ is_active: true });
+          await PatientModel.updateOne({ email: email }, { is_active: true });
         } else {
-          await PsikiaterModel.updateOne({ is_active: true });
+          await PsikiaterModel.updateOne({ email: email }, { is_active: true });
         }
 
         await verifyData.delete();
@@ -55,7 +55,7 @@ class VerifyController {
       const emailSent = await emailer(
         email,
         "Verification Link",
-        `<h3><strong>Clink this link to verify your account: </strong>http://${process.env.SERVER_IP_ADDRESS}:${process.env.PORT}/verify-user/verify/${token}</h3>`
+        `<h3><strong>Clink this link to verify your account: </strong><a href="http://${SERVER_IP_ADDRESS}:${PORT}/verify-user/verify/${verificationToken}">Verification Link</a></h3>`
       );
 
       if (!emailSent.messageId) {

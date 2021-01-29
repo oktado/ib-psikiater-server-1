@@ -55,7 +55,7 @@ class AuthController {
       const emailSent = await emailer(
         patient.email,
         "Verification Link",
-        `<h3><strong>Clink this link to verify your account: </strong>http://${SERVER_IP_ADDRESS}:${PORT}/verify-user/verify/${verificationToken}</h3>`
+        `<h3><strong>Clink this link to verify your account: </strong><a href="http://${SERVER_IP_ADDRESS}:${PORT}/verify-user/verify/${verificationToken}">Verification Link</a></h3>`
       );
 
       if (!emailSent.messageId) {
@@ -82,7 +82,6 @@ class AuthController {
         date_of_birth,
         work_address,
         gender,
-        specialize,
         experience_year,
         region,
         fees,
@@ -96,7 +95,6 @@ class AuthController {
         date_of_birth: date_of_birth,
         work_address: work_address,
         gender: gender,
-        specialize: specialize,
         info: {
           experience_year: experience_year,
           region: region,
@@ -105,19 +103,13 @@ class AuthController {
       };
       const psikiater = await PsikiaterModel.create(psikiaterData);
 
-      const tokenPayload = {
-        user_id: psikiater._id,
-        role: PSIKIATER,
-      };
-
-      const jwtToken = jwt.sign(tokenPayload, SECRET_KEY);
+      if (!psikiater) {
+        throw new Error("Failed registering psychiatrist");
+      }
 
       res.status(201).json({
         status: "created",
         message: "Success create psikiater data.",
-        role: PSIKIATER,
-        data: psikiater,
-        token: jwtToken,
       });
     } catch (error) {
       next(error);

@@ -4,7 +4,7 @@ const psikiaterSchema = new mongoose.Schema(
   {
     is_active: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     first_name: {
       type: String,

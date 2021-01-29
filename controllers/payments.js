@@ -1,4 +1,11 @@
 const PaymentModel = require("../models/payments");
+const AppointmentModel = require("../models/appointments");
+const emailer = require("../utilities/emailer");
+const jwt = require("jsonwebtoken");
+const { PATIENT } = require("../constants/role");
+const SECRET_KEY = process.env.SECRET_KEY;
+const SERVER_IP_ADDRESS = process.env.SERVER_IP_ADDRESS;
+const PORT = process.env.PORT;
 
 class PaymentController {
   static paymentCheckout = async (req, res, next) => {
@@ -131,14 +138,9 @@ class PaymentController {
   static updatePaymentMethod = async (req, res, next) => {
     try {
       const { payment_id, payment_method } = req.body;
-      const paymentData = await PaymentModel.findByIdAndUpdate(
-        payment_id,
-        {
-          payment_method: payment_method,
-        },
-        { new: true }
-      );
-
+      const paymentData = await PaymentModel.findByIdAndUpdate(payment_id, {
+        payment_method: payment_method,
+      });
       if (!paymentData) {
         throw new Error("Please Choose Payment Method");
       }

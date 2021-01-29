@@ -24,6 +24,8 @@ Router.get(
   PsychiatristController.getInactivePsychiatrist
 );
 
+Router.use(authentication);
+
 Router.use(authorization(PSIKIATER));
 
 Router.patch("/:id", PsychiatristController.updatePsikiaterData);
