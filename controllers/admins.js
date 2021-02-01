@@ -172,6 +172,7 @@ class AdminController {
             idPatient: appointment.patient_id.toString(),
             consultationDate: appointment.appointment_date,
             consultationTime: appointment.appointment_time,
+            isDone: false,
           };
 
           const room = await chatroom.createChatroom(chatRoomData);

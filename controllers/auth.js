@@ -85,6 +85,7 @@ class AuthController {
         experience_year,
         region,
         fees,
+        specialize,
       } = req.body;
 
       const psikiaterData = {
@@ -100,6 +101,7 @@ class AuthController {
           region: region,
         },
         fees: fees,
+        specialize: specialize,
       };
       const psikiater = await PsikiaterModel.create(psikiaterData);
 
