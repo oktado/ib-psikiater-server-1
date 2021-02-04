@@ -2,13 +2,13 @@
   "name": "ib-psikiater-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "engines": {
     "node": "12.18.2",
     "npm": "6.14.8"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
