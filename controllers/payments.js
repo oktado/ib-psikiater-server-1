@@ -134,7 +134,7 @@ class PaymentController {
       const uploadSlip = await PaymentModel.findByIdAndUpdate(
         req.params.payment_id,
         {
-          slip_url: `http://${process.env.SERVER_IP_ADDRESS}:${process.env.PORT}/media/${filename}`,
+          slip_url: `https://${process.env.SERVER_IP_ADDRESS}/media/${filename}`,
         },
         {
           new: true,

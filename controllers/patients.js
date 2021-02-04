@@ -30,7 +30,7 @@ class PatientController {
       const uploadAvatar = await PatientModel.findByIdAndUpdate(
         req.params.id,
         {
-          avatar_url: `http://${SERVER_IP_ADDRESS}:${PORT}/media/${filename}`,
+          avatar_url: `https://${SERVER_IP_ADDRESS}/media/${filename}`,
         },
         {
           new: true,
