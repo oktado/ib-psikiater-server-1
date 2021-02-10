@@ -26,13 +26,15 @@ class VerifyController {
 
         res
           .status(301)
-          .redirect(`https://${SERVER_IP_ADDRESS}/login?verify=true`);
+          .redirect(
+            `https://${process.env.SERVER_IP_ADDRESS}/login?verify=true`
+          );
       }
 
       res
         .status(301)
         .redirect(
-          `https://${SERVER_IP_ADDRESS}/email-verification?type=expired&token=${token}`
+          `https://${process.env.SERVER_IP_ADDRESS}/email-verification?type=expired&token=${token}`
         );
     } catch (error) {
       next(error);
@@ -57,7 +59,7 @@ class VerifyController {
       const emailSent = await emailer(
         email,
         "Verification Link",
-        `<h3><strong>Clink this link to verify your account: </strong><a href="https://${SERVER_IP_ADDRESS}/verify-user/verify/${verificationToken}">Verification Link</a></h3>`
+        `<h3><strong>Clink this link to verify your account: </strong><a href="https://${process.env.SERVER_IP_ADDRESS}/verify-user/verify/${verificationToken}">Verification Link</a></h3>`
       );
 
       if (!emailSent.messageId) {
