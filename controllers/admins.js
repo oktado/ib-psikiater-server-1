@@ -96,7 +96,7 @@ class AdminController {
         const emailSent = await emailer(
           psychiatrist.email,
           "Registration Accepted",
-          `<h3><strong>Your registration has been accepted by admin, please clink this link to verify your account: </strong><a href="http://${SERVER_IP_ADDRESS}:${PORT}/verify-user/verify/${verificationToken}">Verification Link</a></h3>`
+          `<h3><strong>Your registration has been accepted by admin, please clink this link to verify your account: </strong><a href="http://${SERVER_IP_ADDRESS}/verify-user/verify/${verificationToken}">Verification Link</a></h3>`
         );
 
         if (!emailSent) {
