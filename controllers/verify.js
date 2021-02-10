@@ -24,13 +24,15 @@ class VerifyController {
 
         await verifyData.delete();
 
-        res.status(301).redirect("http://localhost:3000/login?verify=true");
+        res
+          .status(301)
+          .redirect(`https://${SERVER_IP_ADDRESS}:${PORT}/login?verify=true`);
       }
 
       res
         .status(301)
         .redirect(
-          `http://localhost:3000/email-verification?type=expired&token=${token}`
+          `https://${SERVER_IP_ADDRESS}:${PORT}/email-verification?type=expired&token=${token}`
         );
     } catch (error) {
       next(error);
@@ -55,7 +57,7 @@ class VerifyController {
       const emailSent = await emailer(
         email,
         "Verification Link",
-        `<h3><strong>Clink this link to verify your account: </strong><a href="http://${SERVER_IP_ADDRESS}:${PORT}/verify-user/verify/${verificationToken}">Verification Link</a></h3>`
+        `<h3><strong>Clink this link to verify your account: </strong><a href="https://${SERVER_IP_ADDRESS}:${PORT}/verify-user/verify/${verificationToken}">Verification Link</a></h3>`
       );
 
       if (!emailSent.messageId) {

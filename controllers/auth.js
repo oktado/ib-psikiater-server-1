@@ -55,7 +55,7 @@ class AuthController {
       const emailSent = await emailer(
         patient.email,
         "Verification Link",
-        `<h3><strong>Clink this link to verify your account: </strong><a href="http://${SERVER_IP_ADDRESS}:${PORT}/verify-user/verify/${verificationToken}">Verification Link</a></h3>`
+        `<h3><strong>Clink this link to verify your account: </strong><a href="https://${SERVER_IP_ADDRESS}:${PORT}/verify-user/verify/${verificationToken}">Verification Link</a></h3>`
       );
 
       if (!emailSent.messageId) {
