@@ -26,15 +26,13 @@ class VerifyController {
 
         res
           .status(301)
-          .redirect(
-            `https://${process.env.SERVER_IP_ADDRESS}/login?verify=true`
-          );
+          .redirect(`https://${process.env.FRONT_END_URL}/login?verify=true`);
       }
 
       res
         .status(301)
         .redirect(
-          `https://${process.env.SERVER_IP_ADDRESS}/email-verification?type=expired&token=${token}`
+          `https://${process.env.FRONT_END_URL}/email-verification?type=expired&token=${token}`
         );
     } catch (error) {
       next(error);
